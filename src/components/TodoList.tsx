@@ -15,7 +15,7 @@ export const TodoList = () =>{
         <div>
             <h3>TodoList</h3>
             <TodoForm onSubmit= {(todo:Todo) => addTodo(todo)}/>
-            <Todo arr={todos}/>
+            <Todo todos={todos}/>
         </div>
     );
 }

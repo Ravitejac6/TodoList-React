@@ -1,13 +1,17 @@
 import * as React from 'react';
+import { List } from "@material-ui/core";
+
 interface Props{
-    arr: Todo[];
+    todos: Todo[];
 }
-export const Todo: React.FC<Props> = ({arr}) =>(
-    <React.Fragment>
+export const Todo: React.FC<Props> = ({todos}) =>{
+    return (
+        <List>
         {
-            arr.map((item:Todo) =>(
-                <div key={item.id}>{item.text}</div>
+            todos.map((item:Todo) =>(
+                <div className="todo-item" key={item.id}>{item.text}</div>
             ))
         }
-    </React.Fragment>
-)
+        </List>
+    );
+}
