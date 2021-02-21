@@ -1,21 +1,21 @@
-import {useState} from 'react';
-import {TodoForm} from './TodoForm';
+import {FunctionComponent} from 'react';
 import {Todo} from './Todo';
-
-export const TodoList = () =>{
-    const [todos,setTodos] = useState<Todo[]>([]);
+import { List } from "@material-ui/core";
 
 
-    const addTodo = (todo:Todo) =>{
-        const newTodos:Todo[] = [todo,...todos];
-        setTodos(newTodos);
-       // console.log(todo,...todos);
-    }
+interface Props{
+    todos: Todo[];
+    removeTodo :(id:number) =>void;
+}
+export const TodoList:FunctionComponent<Props> = (props) =>{
+    
     return(
-        <div>
-            <h3>TodoList</h3>
-            <TodoForm onSubmit= {(todo:Todo) => addTodo(todo)}/>
-            <Todo todos={todos}/>
-        </div>
+        <List>
+        {
+            props.todos.map((item:Todo) =>(
+                <Todo key={item.id} todo={item} removeTodo={(id:number) => props.removeTodo(id)}/>
+            ))
+        }
+        </List>
     );
 }

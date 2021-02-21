@@ -1,17 +1,26 @@
 import * as React from 'react';
-import { List } from "@material-ui/core";
+import { ListItem, Checkbox, Button, ListItemText } from "@material-ui/core";
 
 interface Props{
-    todos: Todo[];
+    todo: Todo;
+    removeTodo :(id:number) => void;
 }
-export const Todo: React.FC<Props> = ({todos}) =>{
+
+
+export const Todo: React.FC<Props> = (props) =>{
+    const handleRemoveTodo = () =>{
+        props.removeTodo(props.todo.id);
+    }
     return (
-        <List>
-        {
-            todos.map((item:Todo) =>(
-                <div className="todo-item" key={item.id}>{item.text}</div>
-            ))
-        }
-        </List>
+        <ListItem style={{ display: "flex" }}>
+      <Checkbox/>
+      <ListItemText>
+        {props.todo.text}
+      </ListItemText>
+      <Button color="primary">Edit</Button>
+      <Button color="secondary" onClick={() => handleRemoveTodo()}>
+        Delete
+      </Button>
+    </ListItem>
     );
 }
