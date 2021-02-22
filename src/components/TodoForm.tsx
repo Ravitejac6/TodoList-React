@@ -9,7 +9,8 @@ interface Props{
 export const TodoForm:React.FunctionComponent<Props> = (props) =>{
     let newTodo:Todo = {
         id:0,
-        text:''
+        text:'',
+        isCompleted:false,
     }
    const [input,setInput] = useState('');
 
@@ -20,7 +21,8 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
         if(input.trim()){   // To avoid the empty string.
             let todo:Todo ={
                 id : Math.floor(Math.random()*10000),
-                text : input
+                text : input,
+                isCompleted:false
             } 
             props.onSubmit(todo);
             setTodo({ ...todo, text: "" });
@@ -40,7 +42,7 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
                 <TextField type="text" placeholder="Enter the task" onChange={(e) => handleChange(e)} value={todo.text}/>
                 <Button type="submit" variant="contained" color="primary"> Add Todo</Button>
             </form>
-            <p>Input text :{todo.text}</p>
+            <p>Task :{todo.text}</p>
         </div>
     );
 }
