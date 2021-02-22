@@ -88,7 +88,10 @@ export const App = () => {
     <div className="App">
       <div className="box">
       <h1>Todo App</h1>
-      <TodoForm onSubmit= {(todo:Todo) => addTodo(todo)} editItem={editItem} editTask={(text:string,id:number) => editTask(text,id)}/>
+      <TodoForm onSubmit= {(todo:Todo) => addTodo(todo)} 
+          editItem={editItem} 
+          editTask={(text:string,id:number) => editTask(text,id)}
+      />
       <TodoList 
         todos={todos} 
         removeTodo={(id:number) => removeTodo(id)} 

@@ -35,7 +35,7 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
 
     const handleSubmit = (e:React.FormEvent) =>{
         e.preventDefault();
-        if(props.editItem===null){   // To avoid the empty string.
+        if(props.editItem===null){   
             let todo:Todo ={
                 taskId : Math.floor(Math.random()*10000),
                 taskDescription : input,
@@ -46,7 +46,7 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
         else{
             props.editTask(input,props.editItem.taskId);
         }
-        setTodo({ ...todo, taskDescription: "" });
+        setTodo({ ...todo, taskDescription: "" }); // After submit making the input form field as empty.
     }
 
     const handleInputChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{
@@ -65,7 +65,13 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
                     onChange={(e) => handleInputChange(e)} 
                     value={todo.taskDescription}
                 />
-                <Button type="submit" variant="contained" color="primary" startIcon={<AddIcon/>}>Add Todo</Button>
+                <Button 
+                    type="submit" 
+                    variant="contained" 
+                    color="primary" 
+                    startIcon={<AddIcon/>}>
+                    Add Todo
+                </Button>
             </form>
             {/* <p>Task :{todo.taskDescription}</p> */}
         </div>
