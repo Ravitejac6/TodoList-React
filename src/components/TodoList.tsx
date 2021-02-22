@@ -16,7 +16,7 @@ export const TodoList:FunctionComponent<Props> = (props) =>{
         {
             props.todos.map((item:Todo) =>(
                 <Todo 
-                    key={item.id} 
+                    key={item.taskId} 
                     todo={item} 
                     removeTodo={(id:number) => props.removeTodo(id)} 
                     editTodo={(id:number) => props.editTodo(id)}

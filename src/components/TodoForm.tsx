@@ -1,6 +1,5 @@
-import {useState,useEffect} from 'react';
+import {useState} from 'react';
 import * as React from 'react';
-import { Todo } from './Todo';
 import { Button, TextField } from "@material-ui/core";
 
 interface Props{
@@ -8,8 +7,8 @@ interface Props{
 }
 export const TodoForm:React.FunctionComponent<Props> = (props) =>{
     let newTodo:Todo = {
-        id:0,
-        text:'',
+        taskId:0,
+        taskDescription:'',
         isCompleted:false,
     }
    const [input,setInput] = useState('');
@@ -20,18 +19,18 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
         e.preventDefault();
         if(input.trim()){   // To avoid the empty string.
             let todo:Todo ={
-                id : Math.floor(Math.random()*10000),
-                text : input,
+                taskId : Math.floor(Math.random()*10000),
+                taskDescription : input,
                 isCompleted:false
             } 
             props.onSubmit(todo);
-            setTodo({ ...todo, text: "" });
+            setTodo({ ...todo, taskDescription: "" });
             setInput('');
         }
     }
 
     const handleInputChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{
-        setTodo({...todo, text:e.target.value});
+        setTodo({...todo, taskDescription:e.target.value});
        // console.log(e.target.value);
        setInput(e.target.value);
     }
@@ -43,11 +42,11 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
                     type="text" 
                     placeholder="Enter the task" 
                     onChange={(e) => handleInputChange(e)} 
-                    value={todo.text}
+                    value={todo.taskDescription}
                 />
                 <Button type="submit" variant="contained" color="primary"> Add Todo</Button>
             </form>
-            <p>Task :{todo.text}</p>
+            <p>Task :{todo.taskDescription}</p>
         </div>
     );
 }

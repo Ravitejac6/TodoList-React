@@ -28,12 +28,12 @@ export const App = () => {
     }
 
     const removeTodo = (id:number) =>{
-      setTodos(todos.filter((todo) => todo.id !== id))
+      setTodos(todos.filter((todo) => todo.taskId !== id))
     } 
 
     const editTodo = (id:number) =>{
       todos.forEach((todo) =>{
-        if(todo.id === id){
+        if(todo.taskId === id){
           console.log(todo);
         }
       })
@@ -43,7 +43,7 @@ export const App = () => {
     const toggleComplete = (id:number) =>{
       setTodos(
         todos.map((todo) =>{
-          if(todo.id === id){
+          if(todo.taskId === id){
             return{
               ...todo,
               isCompleted : !todo.isCompleted,

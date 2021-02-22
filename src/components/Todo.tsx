@@ -11,15 +11,15 @@ interface Props{
 
 export const Todo: React.FC<Props> = (props) =>{
     const handleRemoveTodo = () =>{
-        props.removeTodo(props.todo.id);
+        props.removeTodo(props.todo.taskId);
     }
 
     const handleCheckboxClick = () =>{
-      props.toggleComplete(props.todo.id);
+      props.toggleComplete(props.todo.taskId);
     }
 
     const handleEditTodo = () =>{
-      props.editTodo(props.todo.id);
+      props.editTodo(props.todo.taskId);
     }
     return (
       <ListItem style={{ display: "flex" }}>
@@ -32,7 +32,7 @@ export const Todo: React.FC<Props> = (props) =>{
             textDecoration: props.todo.isCompleted ? "line-through" : undefined,
           }} 
         >
-          {props.todo.text}
+          {props.todo.taskDescription}
         </ListItemText>
         <Button variant="outlined" color="primary" onClick={() => handleEditTodo()}>Edit</Button>
         <Button variant="outlined" color="secondary" onClick={() => handleRemoveTodo()}>
