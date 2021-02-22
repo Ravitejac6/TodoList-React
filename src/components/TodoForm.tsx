@@ -1,9 +1,11 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import * as React from 'react';
 import { Button, TextField } from "@material-ui/core";
 
 interface Props{
     onSubmit :(todo:Todo) => void;
+    editItem:Todo | null;
+    editTask:(text:string, id:number) => void;
 }
 export const TodoForm:React.FunctionComponent<Props> = (props) =>{
     let newTodo:Todo = {
@@ -15,9 +17,18 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
 
     const[todo,setTodo] = useState<Todo>(newTodo);
 
+    useEffect(()=>{
+        if(props.editItem!==null){
+            console.log(props.editItem.taskDescription);
+            setInput(props.editItem.taskDescription);
+        }else{
+            setInput('');
+        }
+    }, [props.editItem]);
+
     const handleSubmit = (e:React.FormEvent) =>{
         e.preventDefault();
-        if(input.trim()){   // To avoid the empty string.
+        if(input.trim() || props.editItem===null){   // To avoid the empty string.
             let todo:Todo ={
                 taskId : Math.floor(Math.random()*10000),
                 taskDescription : input,
@@ -27,6 +38,9 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
             setTodo({ ...todo, taskDescription: "" });
             setInput('');
         }
+        else{
+            props.editTask(input,props.editItem.taskId);
+        }
     }
 
     const handleInputChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{
@@ -34,6 +48,7 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
        // console.log(e.target.value);
        setInput(e.target.value);
     }
+
 
     return(
         <div>
@@ -44,7 +59,7 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
                     onChange={(e) => handleInputChange(e)} 
                     value={todo.taskDescription}
                 />
-                <Button type="submit" variant="contained" color="primary"> Add Todo</Button>
+                <Button className="add-button" type="submit" variant="contained" color="primary"> Add Todo</Button>
             </form>
             <p>Task :{todo.taskDescription}</p>
         </div>

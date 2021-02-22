@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { ListItem, Checkbox, Button, ListItemText } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete'
+import CreateIcon from '@material-ui/icons/Create'
 
 interface Props{
     todo: Todo;
@@ -28,14 +30,15 @@ export const Todo: React.FC<Props> = (props) =>{
           onClick={() => handleCheckboxClick()}
         />
         <ListItemText
+          className="todo-list"
           style={{
             textDecoration: props.todo.isCompleted ? "line-through" : undefined,
           }} 
         >
           {props.todo.taskDescription}
         </ListItemText>
-        <Button variant="outlined" color="primary" onClick={() => handleEditTodo()}>Edit</Button>
-        <Button variant="outlined" color="secondary" onClick={() => handleRemoveTodo()}>
+        <Button variant="outlined" color="primary" onClick={() => handleEditTodo()} startIcon={<CreateIcon />}>Edit</Button>
+        <Button variant="outlined" color="secondary" onClick={() => handleRemoveTodo()} startIcon={<DeleteIcon />}>
           Delete
         </Button>
       </ListItem>

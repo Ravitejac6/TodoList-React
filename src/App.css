@@ -1,3 +1,26 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(240, 232, 236, 0.89);
+}
+
+.box {
+  padding: 5%;
+  border: 1px solid #bfbfbf;
+  background-color: white;
+  box-shadow: 10px 10px 5px #201e1e;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+}
+
+.todo-list {
+  margin-right: 10px;
 }
