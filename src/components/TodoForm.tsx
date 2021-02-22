@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import * as React from 'react';
 import { Todo } from './Todo';
 import { Button, TextField } from "@material-ui/core";
@@ -30,7 +30,7 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
         }
     }
 
-    const handleChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{
+    const handleInputChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{
         setTodo({...todo, text:e.target.value});
        // console.log(e.target.value);
        setInput(e.target.value);
@@ -39,7 +39,12 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
     return(
         <div>
             <form onSubmit = {(e) =>handleSubmit(e)}>
-                <TextField type="text" placeholder="Enter the task" onChange={(e) => handleChange(e)} value={todo.text}/>
+                <TextField 
+                    type="text" 
+                    placeholder="Enter the task" 
+                    onChange={(e) => handleInputChange(e)} 
+                    value={todo.text}
+                />
                 <Button type="submit" variant="contained" color="primary"> Add Todo</Button>
             </form>
             <p>Task :{todo.text}</p>

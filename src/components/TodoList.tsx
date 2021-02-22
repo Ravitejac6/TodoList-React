@@ -7,6 +7,7 @@ interface Props{
     todos: Todo[];
     removeTodo :(id:number) =>void;
     toggleComplete:(id:number)=>void;
+    editTodo:(id:number) => void;
 }
 export const TodoList:FunctionComponent<Props> = (props) =>{
     
@@ -14,7 +15,13 @@ export const TodoList:FunctionComponent<Props> = (props) =>{
         <List>
         {
             props.todos.map((item:Todo) =>(
-                <Todo key={item.id} todo={item} removeTodo={(id:number) => props.removeTodo(id)} toggleComplete={(id:number) => props.toggleComplete(id)}/>
+                <Todo 
+                    key={item.id} 
+                    todo={item} 
+                    removeTodo={(id:number) => props.removeTodo(id)} 
+                    editTodo={(id:number) => props.editTodo(id)}
+                    toggleComplete={(id:number) => props.toggleComplete(id)}
+                />
             ))
         }
         </List>

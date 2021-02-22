@@ -5,6 +5,7 @@ interface Props{
     todo: Todo;
     removeTodo :(id:number) => void;
     toggleComplete :(id:number) => void;
+    editTodo:(id:number) => void;
 }
 
 
@@ -16,20 +17,27 @@ export const Todo: React.FC<Props> = (props) =>{
     const handleCheckboxClick = () =>{
       props.toggleComplete(props.todo.id);
     }
+
+    const handleEditTodo = () =>{
+      props.editTodo(props.todo.id);
+    }
     return (
-        <ListItem style={{ display: "flex" }}>
-      <Checkbox checked={props.todo.isCompleted} onClick={() => handleCheckboxClick()}/>
-      <ListItemText
-        style={{
-          textDecoration: props.todo.isCompleted ? "line-through" : undefined,
-        }} 
-      >
-        {props.todo.text}
-      </ListItemText>
-      <Button color="primary">Edit</Button>
-      <Button color="secondary" onClick={() => handleRemoveTodo()}>
-        Delete
-      </Button>
-    </ListItem>
+      <ListItem style={{ display: "flex" }}>
+        <Checkbox 
+          checked={props.todo.isCompleted} 
+          onClick={() => handleCheckboxClick()}
+        />
+        <ListItemText
+          style={{
+            textDecoration: props.todo.isCompleted ? "line-through" : undefined,
+          }} 
+        >
+          {props.todo.text}
+        </ListItemText>
+        <Button variant="outlined" color="primary" onClick={() => handleEditTodo()}>Edit</Button>
+        <Button variant="outlined" color="secondary" onClick={() => handleRemoveTodo()}>
+          Delete
+        </Button>
+      </ListItem>
     );
 }
