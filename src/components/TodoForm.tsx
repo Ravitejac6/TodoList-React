@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import * as React from 'react';
 import { Button, TextField } from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
 
 interface Props{
     onSubmit :(todo:Todo) => void;
@@ -17,10 +18,16 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
 
     const[todo,setTodo] = useState<Todo>(newTodo);
 
+    // For initial rendering the text in the form should be empty
+    useEffect(()=>{
+        setTodo(newTodo);
+    },[])
+
+    // Whenever there is a change in the edit item we set it.
     useEffect(()=>{
         if(props.editItem!==null){
-            console.log(props.editItem.taskDescription);
-            setInput(props.editItem.taskDescription);
+            //console.log(props.editItem.taskDescription);
+            setTodo(props.editItem);
         }else{
             setInput('');
         }
@@ -28,19 +35,18 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
 
     const handleSubmit = (e:React.FormEvent) =>{
         e.preventDefault();
-        if(input.trim() || props.editItem===null){   // To avoid the empty string.
+        if(props.editItem===null){   // To avoid the empty string.
             let todo:Todo ={
                 taskId : Math.floor(Math.random()*10000),
                 taskDescription : input,
                 isCompleted:false
             } 
             props.onSubmit(todo);
-            setTodo({ ...todo, taskDescription: "" });
-            setInput('');
         }
         else{
             props.editTask(input,props.editItem.taskId);
         }
+        setTodo({ ...todo, taskDescription: "" });
     }
 
     const handleInputChange = (e:React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{
@@ -51,7 +57,7 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
 
 
     return(
-        <div>
+        <div className="todo-form">
             <form onSubmit = {(e) =>handleSubmit(e)}>
                 <TextField 
                     type="text" 
@@ -59,9 +65,9 @@ export const TodoForm:React.FunctionComponent<Props> = (props) =>{
                     onChange={(e) => handleInputChange(e)} 
                     value={todo.taskDescription}
                 />
-                <Button className="add-button" type="submit" variant="contained" color="primary"> Add Todo</Button>
+                <Button type="submit" variant="contained" color="primary" startIcon={<AddIcon/>}>Add Todo</Button>
             </form>
-            <p>Task :{todo.taskDescription}</p>
+            {/* <p>Task :{todo.taskDescription}</p> */}
         </div>
     );
 }

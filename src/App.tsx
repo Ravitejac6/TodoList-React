@@ -15,7 +15,6 @@ export const App = () => {
     const data = localStorage.getItem(LOCAL_STORAGE_KEY);
     if(data){
       let todos_data = JSON.parse(data);
-      console.log(todos_data);
       setTodos(todos_data);
     }
   },[])
@@ -26,9 +25,27 @@ export const App = () => {
   },[todos])
 
     const addTodo = (todo:Todo) =>{
+      const item = todos.find((task) => task.taskId === todo.taskId);
+      // Finding whether the todo is existed or not. If exists change the text(helps for editItem functionality).
+      if(item){
+        setTodos(
+          todos.map((task) =>{
+            if(task.taskId === todo.taskId){
+              return{
+                ...task,
+                isCompleted : false,
+                taskDescription:todo.taskDescription
+              }
+            }
+            return todo;
+          })
+        )
+      }
+      else{ //New item is added
         const newTodos:Todo[] = [todo,...todos];
         setTodos(newTodos);
-        console.log(todo,...todos);
+      }
+      //console.log(todo,...todos);
     }
 
     const removeTodo = (id:number) =>{
@@ -38,7 +55,7 @@ export const App = () => {
     const editTodo = (id:number) =>{
       const item = todos.find((task) => task.taskId === id);
       if(item !== undefined){
-        console.log(item);
+        //console.log(item);
         setEditItem(item);
       }
       else{
