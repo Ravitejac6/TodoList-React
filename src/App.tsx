@@ -52,7 +52,7 @@ export const App = () => {
       setTodos(todos.filter((todo) => todo.taskId !== id))
     } 
 
-    const editTodo = (id:number) =>{
+    const findTodo = (id:number) =>{
       const item = todos.find((task) => task.taskId === id);
       if(item !== undefined){
         //console.log(item);
@@ -96,7 +96,7 @@ export const App = () => {
         todos={todos} 
         removeTodo={(id:number) => removeTodo(id)} 
         toggleComplete={(id:number) => toggleComplete(id)}
-        editTodo = {(id:number) => editTodo(id)}
+        findTodo = {(id:number) => findTodo(id)}
       />
       </div>
     </div>

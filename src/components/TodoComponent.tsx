@@ -7,7 +7,7 @@ interface Props{
     todo: Todo;
     removeTodo :(id:number) => void;
     toggleComplete :(id:number) => void;
-    editTodo:(id:number) => void;
+    findTodo:(id:number) => void;
 }
 
 
@@ -21,7 +21,7 @@ export const TodoComponent: React.FC<Props> = (props) =>{
     }
 
     const handleEditTodo = () =>{
-      props.editTodo(props.todo.taskId);
+      props.findTodo(props.todo.taskId);
     }
     return (
       <ListItem style={{ display: "flex" }}>
