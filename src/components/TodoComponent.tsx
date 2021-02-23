@@ -11,7 +11,7 @@ interface Props{
 }
 
 
-export const Todo: React.FC<Props> = (props) =>{
+export const TodoComponent: React.FC<Props> = (props) =>{
     const handleRemoveTodo = () =>{
         props.removeTodo(props.todo.taskId);
     }

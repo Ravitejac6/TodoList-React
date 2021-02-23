@@ -1,5 +1,5 @@
 import {FunctionComponent} from 'react';
-import {Todo} from './Todo';
+import {TodoComponent} from './TodoComponent';
 import { List } from "@material-ui/core";
 
 
@@ -15,7 +15,7 @@ export const TodoList:FunctionComponent<Props> = (props) =>{
         <List>
         {
             props.todos.map((item:Todo) =>(
-                <Todo 
+                <TodoComponent
                     key={item.taskId} 
                     todo={item} 
                     removeTodo={(id:number) => props.removeTodo(id)} 
